@@ -58,6 +58,20 @@ namespace ArgsProblem.Tests
             Assert.NotEmpty(lists.First().Text);
         }
 
+        [Fact]
+        public void test_For_No_Result_Found()
+        {
+            // Example how to use the driver:
+            TypeInSearchBar("castle");
+            Search();
+            ExplicitWaitForResults(TimeSpan.FromMilliseconds(100));
+
+            var errorTextDivs = _driver.FindElements(By.Id("error-no-results"));
+            Assert.Equal(1, errorTextDivs.Count);
+            var errorDivText = errorTextDivs.First().Text;
+            Assert.Equal("No results", errorDivText);
+        }
+
         private void TypeInSearchBar(string text)
         {
             var inputTextElement = _driver.FindElement(By.Id("search-input"));
