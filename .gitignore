@@ -1,0 +1,4 @@
+.vs
+ArgsProblem.Tests.sln.DotSettings.user
+ArgsProblem.Tests/bin/*
+ArgsProblem.Tests/obj/*
