@@ -72,6 +72,21 @@ namespace ArgsProblem.Tests
             Assert.Equal("No results", errorDivText);
         }
 
+        [Fact]
+        public void test_For_Exact_Number_Of_Results_Found()
+        {
+            // Example how to use the driver:
+            TypeInSearchBar("Port Royal");
+            Search();
+            ExplicitWaitForResults(TimeSpan.FromMilliseconds(100));
+
+            var unOrderLists = _driver.FindElement(By.Id("search-results"));
+            var lists = unOrderLists.FindElements(By.TagName("li"));
+            Assert.Equal(1, lists.Count);
+            var portName = lists.First().Text;
+            Assert.Equal("Port Royal", portName);
+        }
+
         private void TypeInSearchBar(string text)
         {
             var inputTextElement = _driver.FindElement(By.Id("search-input"));
