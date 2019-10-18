@@ -87,6 +87,19 @@ namespace ArgsProblem.Tests
             Assert.Equal("Port Royal", portName);
         }
 
+        [Fact]
+        public void test_For_All_11_Ports_Search()
+        {
+            TypeInSearchBar("$");
+            Search();
+            ExplicitWaitForResults(TimeSpan.FromMilliseconds(100));
+
+            var unOrderLists = _driver.FindElement(By.Id("search-results"));
+            var lists = unOrderLists.FindElements(By.TagName("li"));
+            Assert.Equal(11, lists.Count);
+            Assert.All(lists.Select(x => x.Text), Assert.NotEmpty);
+        }
+
         private void TypeInSearchBar(string text)
         {
             var inputTextElement = _driver.FindElement(By.Id("search-input"));
